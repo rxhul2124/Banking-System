@@ -1,0 +1,21 @@
+.home-container {
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+
+    .head-container {
+        display: grid;
+        grid-template-rows: 1fr;
+    }
+
+    .main-container {
+        display: grid;
+        grid-template-rows: 1fr;
+    }
+
+    .account-details {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+}
