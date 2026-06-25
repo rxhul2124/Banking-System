@@ -2,5 +2,34 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 20vh;
+    height: 100%;
+    padding-inline: 1rem;
+
+    p {
+        font-size: 2rem;
+        font-weight: 700;
+    }
+
+    .head-options {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .notification {
+            margin: 1rem;
+            padding: 0.5rem;
+            background-color: whitesmoke;
+            border-radius: 50%;
+            border: 2px solid var(--border-color);
+        }
+
+        .theme {
+            margin: 1rem;
+            padding: 0.5rem;
+            background-color: whitesmoke;
+            border-radius: 50%;
+            border: 2px solid var(--border-color);
+        }
+
+    }
 }

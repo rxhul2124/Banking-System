@@ -11,7 +11,6 @@ function Head() {
                 </div>
                 <div className="theme">
                     <i class="fa-solid fa-moon"></i>
-                    <i class="fa-solid fa-sun"></i>
                 </div>
             </div>
         </div>

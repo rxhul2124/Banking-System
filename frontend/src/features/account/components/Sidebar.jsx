@@ -6,7 +6,7 @@ function Sidebar() {
         <>
             <main className="sidebar-container">
                 <div className="upper-section">
-                    <div className="head">
+                    <div className="upper-head">
                         <div className="logo">
                             <i class="fa-solid fa-building-columns"></i>
                         </div>

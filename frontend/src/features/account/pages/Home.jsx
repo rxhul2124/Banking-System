@@ -1,5 +1,6 @@
 import React from "react"
 import "../account.style.scss"
+import "../../../style/button.scss"
 
 import Sidebar from "../components/Sidebar"
 import BalanceCard from "../components/BalanceCard"
@@ -14,8 +15,7 @@ const Home = () => {
                 <Sidebar />
             </div>
             <div className="main-container">
-                <div className="head-container {
-">
+                <div className="head-container">
                     <Head />
                 </div>
                 <div className="account-details">

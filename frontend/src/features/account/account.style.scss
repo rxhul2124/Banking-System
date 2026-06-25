@@ -4,18 +4,31 @@
     display: grid;
     grid-template-columns: 1fr 5fr;
 
+    .sidebar {
+        border-right: 3px solid var(--border-color);
+    }
+
     .head-container {
         display: grid;
-        grid-template-rows: 1fr;
+        height: 70px;
+        padding-top: 1rem;
     }
 
     .main-container {
         display: grid;
-        grid-template-rows: 1fr;
+        background-color: var(--bg-color);
+        overflow-x: hidden;
     }
 
     .account-details {
         display: grid;
         grid-template-columns: 1fr 1fr;
+        margin-top: -3rem;
+    }
+
+    .transaction-table {
+        display: grid;
+        grid-template-columns: 1fr;
+        width: 100%;
     }
 }

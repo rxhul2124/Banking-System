@@ -1,0 +1,40 @@
+.account-container {
+    background-color: var(--bg-color);
+    height: 300px;
+    margin: 1rem 1rem 1rem 2rem;
+    border-radius: 1rem;
+    box-shadow: 20px 20px 100px var(--border-color);
+    border-right: 3px solid var(--border-color);
+
+    .account-head {
+        margin: 0.5rem;
+        padding: 1rem;
+        background-color: white;
+        border-radius: 1rem;
+        font-size: 1.4rem;
+        font-weight: 700;
+        border: 2px solid var(--border-color);
+    }
+
+    .account-head:hover {
+        background-color: #d2d9f4;
+    }
+
+
+    .account-detail {
+
+        p {
+            margin: 0.5rem;
+            padding: 1rem;
+            background-color: white;
+            border-radius: 1rem;
+            font-size: 1.3rem;
+            font-weight: 700;
+            border: 2px solid var(--border-color);
+        }
+    }
+
+    .account-detail p:hover {
+        background-color: #d2d9f4;
+    }
+}

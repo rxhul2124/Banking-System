@@ -7,11 +7,16 @@
     border-radius: 0.75rem;
     cursor: pointer;
     transition: all 0.4s ease-in-outs;
+    background-color: rgb(255, 255, 255);
 
 
     &.primary-button {
         background-color: rgb(173, 13, 83);
         color: white;
+    }
+
+    &.balance-button {
+        background-color: #a6b6f5;
     }
 
     &:active {

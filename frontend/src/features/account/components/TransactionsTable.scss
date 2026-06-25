@@ -1,0 +1,24 @@
+.transaction-container {
+    width: 97%;
+    height: auto;
+    margin: -2rem 1rem 1rem 1rem;
+    background-color: red;
+    border-radius: 1rem;
+
+    .transaction-head {
+        width: 100%;
+        margin-inline: 1rem;
+        font-size: 2rem;
+        padding: 1rem;
+    }
+
+    .transaction-table {
+        width: 100%;
+        margin: 1rem;
+
+        .table-row th,
+        td {
+            padding: 1rem;
+        }
+    }
+}
