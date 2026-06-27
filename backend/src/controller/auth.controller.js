@@ -40,6 +40,7 @@ async function registerUserController(req, res) {
             _id: user._id,
             email: user.email,
             name: user.name,
+            systemUser: user.systemUser
         },
         token
     })
@@ -56,7 +57,7 @@ async function registerUserController(req, res) {
 async function loginUserController(req, res) {
     const { email, password } = req.body;
 
-    const user = await userModel.findOne({ email }).select("+password")
+    const user = await userModel.findOne({ email }).select("+password").select("+systemUser")
 
     if (!user) {
         res.status(401).json({
@@ -86,6 +87,7 @@ async function loginUserController(req, res) {
             _id: user._id,
             email: user.email,
             name: user.name,
+            systemUser: user.systemUser
         },
         token
     })

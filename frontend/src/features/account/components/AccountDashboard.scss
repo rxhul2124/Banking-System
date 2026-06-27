@@ -1,40 +1,129 @@
 .account-container {
-    background-color: var(--bg-color);
-    height: 300px;
-    margin: 1rem 1rem 1rem 2rem;
-    border-radius: 1rem;
-    box-shadow: 20px 20px 100px var(--border-color);
-    border-right: 3px solid var(--border-color);
+    background-color: var(--surface-color);
+    border-radius: var(--card-radius);
+    border: 1px solid var(--border-color);
+    padding: 1.5rem 1.75rem;
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    flex-direction: column;
+    min-height: 280px;
+    width: 100%;
+    margin-top: 2rem;
 
     .account-head {
-        margin: 0.5rem;
-        padding: 1rem;
-        background-color: white;
-        border-radius: 1rem;
-        font-size: 1.4rem;
-        font-weight: 700;
-        border: 2px solid var(--border-color);
-    }
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.5rem;
 
-    .account-head:hover {
-        background-color: #d2d9f4;
-    }
-
-
-    .account-detail {
-
-        p {
-            margin: 0.5rem;
-            padding: 1rem;
-            background-color: white;
-            border-radius: 1rem;
-            font-size: 1.3rem;
+        h3 {
+            font-size: 1.35rem;
             font-weight: 700;
-            border: 2px solid var(--border-color);
+            color: var(--text-primary);
+        }
+
+        .account-menu {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+            padding: 0.35rem;
+            border-radius: 0.3rem;
+            transition: all var(--transition-fast);
+
+            &:hover {
+                color: var(--text-primary);
+                background-color: var(--sidebar-hover-bg);
+            }
         }
     }
 
-    .account-detail p:hover {
-        background-color: #d2d9f4;
+    .account-detail {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        flex: 1;
+
+        .detail-row {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem 1.15rem;
+            background-color: var(--bg-color);
+            border-radius: 0.75rem;
+            border: 1px solid var(--border-light);
+            transition: all var(--transition-fast);
+
+            &:hover {
+                border-color: var(--primary);
+                background-color: var(--sidebar-active-bg);
+            }
+
+            .detail-icon {
+                width: 2.85rem;
+                height: 2.85rem;
+                border-radius: 0.65rem;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 1.05rem;
+                flex-shrink: 0;
+                background-color: #e0f2fe;
+                color: #0284c7;
+
+                &--email {
+                    background-color: #fef3c7;
+                    color: #d97706;
+                }
+
+                &--account {
+                    background-color: #f0fdf4;
+                    color: #16a34a;
+                }
+            }
+
+            .detail-info {
+                display: flex;
+                flex-direction: column;
+                min-width: 0;
+
+                .detail-label {
+                    font-size: 0.75rem;
+                    color: var(--text-muted);
+                    font-weight: 500;
+                    text-transform: uppercase;
+                    letter-spacing: 0.04em;
+                    line-height: 1.2;
+                    margin-bottom: 0.2rem;
+                }
+
+                .detail-value {
+                    font-size: 1.05rem;
+                    font-weight: 600;
+                    color: var(--text-primary);
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                }
+            }
+
+            .detail-toggle {
+                background: none;
+                border: none;
+                color: var(--text-secondary);
+                font-size: 1rem;
+                cursor: pointer;
+                margin-left: auto;
+                padding: 0.35rem;
+                border-radius: 0.3rem;
+                transition: all var(--transition-fast);
+
+                &:hover {
+                    color: var(--text-primary);
+                    background-color: var(--sidebar-hover-bg);
+                }
+            }
+        }
     }
 }

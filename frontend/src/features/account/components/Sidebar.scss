@@ -1,78 +1,115 @@
 .sidebar-container {
-    margin: 0;
-    padding: 0;
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
+    height: 100vh;
     width: 100%;
-    background-color: #f2f3ff;
+    background-color: var(--sidebar-bg);
+    border-right: 1px solid var(--sidebar-border);
+    padding: 1.75rem 0.85rem;
+    position: sticky;
+    top: 0;
 
-    .upper-section {
-        width: 100%;
-
-        .upper-head {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-top: 2rem;
-
-            .logo i {
-                font-size: 2rem;
-                margin-right: 1.2rem;
-            }
-        }
-
-        .link-group {
-            margin-top: 2rem;
-            width: 100%;
-
-            .link {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                border-radius: 1rem;
-                margin-bottom: 0.5rem;
-                height: 3rem;
-                margin-inline: 0.5rem;
-                font-size: 1.1rem;
-                font-weight: 700;
-
-                i {
-                    margin-right: 1.5rem;
-                }
-
-                p {
-                    width: 5rem;
-                }
-            }
-
-            .link:hover {
-                background-color: #d2d9f4;
-            }
-        }
-
+    .sidebar-top {
+        display: flex;
+        flex-direction: column;
     }
 
-    .profile-container {
+    .sidebar-brand {
         display: flex;
-        justify-content: center;
         align-items: center;
-        width: 90%;
-        height: 3rem;
-        border-radius: 1rem;
-        margin: 0.5rem;
-        font-size: 1.2rem;
-        font-weight: 700;
+        gap: 0.85rem;
+        padding: 0.25rem 0.85rem;
+        margin-bottom: 2.25rem;
 
-        p {
-            width: 3rem;
+        .brand-icon {
+            i {
+                font-size: 1.85rem;
+                color: var(--primary);
+            }
         }
+
+        .brand-text {
+            display: flex;
+            flex-direction: column;
+
+            .brand-name {
+                font-size: 1.3rem;
+                font-weight: 800;
+                color: var(--primary);
+                letter-spacing: -0.02em;
+                line-height: 1.2;
+            }
+
+            .brand-tagline {
+                font-size: 0.75rem;
+                color: var(--text-secondary);
+                font-weight: 500;
+            }
+        }
+    }
+
+    .sidebar-nav {
+        display: flex;
+        flex-direction: column;
+        gap: 0.35rem;
+    }
+
+    .nav-link {
+        display: flex;
+        align-items: center;
+        gap: 0.95rem;
+        padding: 0.8rem 0.95rem;
+        border-radius: 0.7rem;
+        font-size: 1rem;
+        font-weight: 600;
+        color: var(--sidebar-text);
+        text-decoration: none;
+        transition: all var(--transition-fast);
+        cursor: pointer;
+        border: none;
+        background: none;
+        width: 100%;
+        font-family: inherit;
 
         i {
-            margin-right: 1.5rem;
+            font-size: 1.1rem;
+            width: 1.35rem;
+            text-align: center;
         }
+
+        &:hover {
+            background-color: var(--sidebar-hover-bg);
+            color: var(--text-primary);
+        }
+
+        &.active {
+            background-color: var(--sidebar-active-bg);
+            color: var(--sidebar-active-text);
+            font-weight: 700;
+        }
+
+
     }
 
-    .profile-container:hover {
-        background-color: #d2d9f4;
+    .admin {
+        display: none;
+    }
+
+    .sidebar-bottom {
+        display: flex;
+        flex-direction: column;
+        gap: 0.35rem;
+        border-top: 1px solid var(--sidebar-border);
+        padding-top: 0.85rem;
+
+        .logout-link {
+            color: var(--text-secondary);
+
+            &:hover {
+                color: var(--danger);
+                background-color: var(--danger-bg);
+            }
+        }
     }
 }

@@ -3,33 +3,40 @@
     justify-content: space-between;
     align-items: center;
     height: 100%;
-    padding-inline: 1rem;
+    padding: 0 2rem;
+    padding-top: 4rem;
 
-    p {
-        font-size: 2rem;
+    .head-greeting {
+        font-size: 1.75rem;
         font-weight: 700;
+        color: var(--text-primary);
+        letter-spacing: -0.02em;
     }
 
     .head-options {
         display: flex;
-        justify-content: space-between;
         align-items: center;
+        gap: 0.65rem;
 
-        .notification {
-            margin: 1rem;
-            padding: 0.5rem;
-            background-color: whitesmoke;
+        .head-icon-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 2.75rem;
+            height: 2.75rem;
             border-radius: 50%;
-            border: 2px solid var(--border-color);
-        }
+            border: 1px solid var(--border-color);
+            background-color: var(--surface-color);
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            font-size: 1.1rem;
 
-        .theme {
-            margin: 1rem;
-            padding: 0.5rem;
-            background-color: whitesmoke;
-            border-radius: 50%;
-            border: 2px solid var(--border-color);
+            &:hover {
+                background-color: var(--sidebar-hover-bg);
+                color: var(--text-primary);
+                border-color: var(--primary);
+            }
         }
-
     }
 }

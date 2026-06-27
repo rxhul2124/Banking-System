@@ -9,27 +9,31 @@ import TransactionTable from "../components/TransactionsTable"
 import Head from "../components/Head"
 
 const Home = () => {
-    return <>
+    return (
         <div className="home-container">
-            <div className="sidebar">
+            <aside className="sidebar-wrapper">
                 <Sidebar />
-            </div>
-            <div className="main-container">
-                <div className="head-container">
+            </aside>
+            <main className="main-container">
+                <header className="head-container">
                     <Head />
-                </div>
-                <div className="account-details">
-                    <BalanceCard />
-                    <AccountDashboard />
-                </div>
-                <div className="transaction-table">
-                    <TransactionTable />
-                </div>
-            </div>
-
+                </header>
+                <section className="content-area">
+                    <div className="top-row">
+                        <div className="top-row__balance">
+                            <BalanceCard />
+                        </div>
+                        <div className="top-row__accounts">
+                            <AccountDashboard />
+                        </div>
+                    </div>
+                    <div className="bottom-row">
+                        <TransactionTable />
+                    </div>
+                </section>
+            </main>
         </div>
-
-    </>
+    )
 }
 
 export default Home

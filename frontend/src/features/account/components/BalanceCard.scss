@@ -1,31 +1,95 @@
-.balance-container {
+.balance-card {
+    background: var(--primary-gradient);
+    border-radius: var(--card-radius);
+    padding: 2rem 2.25rem;
+    color: var(--text-on-dark);
+    position: relative;
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    min-height: 260px;
     width: 100%;
-    height: 300px;
-    background-color: var(--primary);
-    box-shadow: 20px 20px 100px var(--border-color);
-    border-right: 3px solid var(--border-color);
-    color: var(--text-primary);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-top: 2rem;
 
-    border-radius: 1rem;
-    margin: 1rem;
-
-    p {
-        font-size: 1rem;
-        padding-inline: 1rem;
-        padding-block: .75rem;
-        font-weight: 500;
+    /* Subtle decorative circles */
+    &::before {
+        content: '';
+        position: absolute;
+        width: 240px;
+        height: 240px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.04);
+        top: -70px;
+        right: -50px;
     }
 
-    span {
-        font-size: 4rem;
+    &::after {
+        content: '';
+        position: absolute;
+        width: 160px;
+        height: 160px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.03);
+        bottom: -40px;
+        left: -30px;
+    }
+
+    .balance-card__inner {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        justify-content: space-between;
+    }
+
+    .balance-card__label {
+        font-size: 0.9rem;
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        opacity: 0.85;
+        margin-bottom: 0.75rem;
+    }
+
+    .balance-card__amount-row {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        margin-bottom: 2rem;
+    }
+
+    .balance-card__amount {
+        font-size: 3.5rem;
         font-weight: 800;
+        letter-spacing: -0.02em;
+        line-height: 1.1;
     }
 
-    .balance-button {
-        button {
-            margin-top: 3.5rem;
-            margin-inline: 1rem;
-            font-size: 1.1rem;
+    .balance-card__toggle {
+        background: none;
+        border: none;
+        color: var(--text-on-dark);
+        font-size: 1.25rem;
+        cursor: pointer;
+        opacity: 0.7;
+        transition: opacity 0.2s ease;
+        padding: 0.25rem;
+
+        &:hover {
+            opacity: 1;
+        }
+    }
+
+    .balance-card__actions {
+        display: flex;
+        gap: 0.85rem;
+        margin-top: auto;
+
+        .button {
+            padding: 0.75rem 1.75rem;
+            font-size: 1rem;
         }
     }
 }

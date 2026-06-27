@@ -1,25 +1,64 @@
 .button {
     border: none;
     outline: none;
-
-    padding-inline: 1.5rem;
-    padding-block: 0.75rem;
-    border-radius: 0.75rem;
+    padding: 0.6rem 1.4rem;
+    border-radius: 0.5rem;
     cursor: pointer;
-    transition: all 0.4s ease-in-outs;
-    background-color: rgb(255, 255, 255);
-
-
-    &.primary-button {
-        background-color: rgb(173, 13, 83);
-        color: white;
-    }
-
-    &.balance-button {
-        background-color: #a6b6f5;
-    }
+    font-size: 0.875rem;
+    font-weight: 600;
+    transition: all var(--transition-fast);
+    font-family: inherit;
 
     &:active {
-        transform: scale(0.95);
+        transform: scale(0.96);
+    }
+
+    /* Outlined variant (like "Add Funds") */
+    &.btn-outline {
+        background-color: transparent;
+        color: var(--text-on-dark);
+        border: 1.5px solid rgba(255, 255, 255, 0.5);
+
+        &:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.8);
+        }
+    }
+
+    /* Filled dark variant (like "Transfer" on balance card) */
+    &.btn-filled-dark {
+        background-color: rgba(0, 0, 0, 0.25);
+        color: var(--text-on-dark);
+        border: 1.5px solid rgba(255, 255, 255, 0.2);
+
+        &:hover {
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+    }
+
+    /* Primary teal filled */
+    &.btn-primary {
+        background-color: var(--primary);
+        color: white;
+        border: none;
+
+        &:hover {
+            background-color: var(--primary-hover);
+        }
+    }
+
+    /* Quick Transfer button style */
+    &.btn-quick-transfer {
+        background-color: var(--primary);
+        color: white;
+        border: none;
+        width: 100%;
+        padding: 0.75rem 1rem;
+        border-radius: 0.75rem;
+        font-size: 0.9rem;
+
+        &:hover {
+            background-color: var(--primary-hover);
+        }
     }
 }
