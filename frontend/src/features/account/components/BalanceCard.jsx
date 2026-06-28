@@ -5,13 +5,13 @@ import { useAccount } from "../hooks/useAccount"
 function BalanceCard() {
     const [showBalance, setShowBalance] = useState(false);
 
-    const { account, handleGetUserBalance } = useAccount()
+    const { account, handleGetUserBalance, accountBalance } = useAccount()
 
     useEffect(() => {
         if (account?._id) {
             handleGetUserBalance(account._id)
         }
-    }, [])
+    }, [account])
 
     return (
         <div className="balance-card">
@@ -19,7 +19,7 @@ function BalanceCard() {
                 <p className="balance-card__label">TOTAL AVAILABLE BALANCE</p>
                 <div className="balance-card__amount-row">
                     <h2 className="balance-card__amount">
-                        {showBalance ? "$142,509.25" : "••••••••"}
+                        {showBalance ? accountBalance : "••••••••"}
                     </h2>
                     <button
                         className="balance-card__toggle"

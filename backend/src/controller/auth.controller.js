@@ -1,4 +1,5 @@
 const userModel = require("../models/user.model")
+const accountModel = require("../models/account.model")
 const blacklistModel = require("../models/blacklist.model")
 const jwt = require("jsonwebtoken")
 
@@ -25,6 +26,7 @@ async function registerUserController(req, res) {
     const user = await userModel.create({
         email, password, name
     })
+    await accountModel.create({ user: user._id })
 
     const token = jwt.sign(
         { userId: user._id },
@@ -95,7 +97,7 @@ async function loginUserController(req, res) {
 }
 
 async function logoutUserController(req, res) {
-    const token = req.cookies.token || req.headers.authorization?.split("")[1]
+    const token = req.cookies.token || req.headers.authorization?.split(" ")[1]
 
     if (!token) {
         return res.status(200).json({

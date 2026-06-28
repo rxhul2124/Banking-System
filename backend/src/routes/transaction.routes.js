@@ -21,4 +21,12 @@ transactionRouter.post("/", authMiddleware.authMiddleware, transactionController
 
 transactionRouter.post("/initial-funds", authMiddleware.authSystemUserMiddleware, transactionController.createInitialFundsTransactionController)
 
+/**
+ * @route GET /api/transactions/history/:accountId
+ * @description get transaction history of a specific account
+ * @access private
+ */
+
+transactionRouter.get("/history/:accountId", authMiddleware.authMiddleware, transactionController.transactionHistoryController)
+
 module.exports = transactionRouter

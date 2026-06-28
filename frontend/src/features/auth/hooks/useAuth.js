@@ -12,6 +12,10 @@ export const useAuth = () => {
 
     const { user, setUser, loading, setLoading } = context
 
+    /**
+     * @description login a user
+     */
+
     const handleLogin = async ({ email, password }) => {
         setLoading(true)
         try {
@@ -23,6 +27,10 @@ export const useAuth = () => {
         }
     }
 
+    /**
+     * @description register a new user
+     */
+
     const handleRegister = async ({ email, name, password }) => {
         setLoading(true)
         try {
@@ -33,6 +41,10 @@ export const useAuth = () => {
             setLoading(false)
         }
     }
+
+    /**
+     * @description logout a user
+     */
 
     const handleLogout = async () => {
         setLoading(true)

@@ -35,6 +35,7 @@
     .transactions-table {
         width: 100%;
         border-collapse: collapse;
+        table-layout: fixed;
 
         thead {
             th {
@@ -48,6 +49,11 @@
                 border-bottom: 1px solid var(--border-color);
                 border-top: 1px solid var(--border-color);
                 background-color: var(--bg-color);
+
+                &:nth-child(1) { width: 35%; }
+                &:nth-child(2) { width: 25%; }
+                &:nth-child(3) { width: 20%; }
+                &:nth-child(4) { width: 20%; }
             }
         }
 
@@ -132,14 +138,14 @@
             font-weight: 600;
             letter-spacing: 0.02em;
 
-            &--sent {
-                background-color: #e0f2fe;
-                color: #0284c7;
-            }
-
-            &--received {
+            &--credit {
                 background-color: var(--success-bg);
                 color: var(--success-text);
+            }
+
+            &--debit {
+                background-color: #e0f2fe;
+                color: #0284c7;
             }
 
             &--pending {

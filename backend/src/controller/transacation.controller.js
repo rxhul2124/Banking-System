@@ -1,6 +1,7 @@
 const accountModel = require("../models/account.model")
 const transactionModel = require("../models/transaction.model")
 const ledgerModel = require("../models/ledger.model")
+const userModel = require("../models/user.model")
 const mongoose = require("mongoose")
 
 /**
@@ -228,7 +229,41 @@ async function createInitialFundsTransactionController(req, res) {
 
 }
 
+
+/**
+ * @name transactionHistoryController
+ * @description controller to get transaction history of a specific account
+ * @access private
+ */
+
+async function transactionHistoryController(req, res) {
+    const { accountId } = req.params;
+
+    const ledgers = await ledgerModel
+        .find({ account: accountId })
+        .populate({
+            path: 'transaction',
+            populate: [
+                { path: 'fromAccount', populate: { path: 'user', select: 'name' } },
+                { path: 'toAccount', populate: { path: 'user', select: 'name' } }
+            ]
+        })
+
+    if (!ledgers) {
+        return res.status(404).json({
+            message: "No transaction history"
+        })
+    }
+
+    res.status(200).json({
+        ledgers
+    })
+
+
+}
+
 module.exports = {
     createTransactionController,
-    createInitialFundsTransactionController
+    createInitialFundsTransactionController,
+    transactionHistoryController
 }

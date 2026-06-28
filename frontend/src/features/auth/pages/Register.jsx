@@ -1,8 +1,7 @@
-import react, { useState } from "react"
-import { Link } from "react-router"
+import React, { useState } from "react"
+import { Link, useNavigate } from "react-router-dom"
 import "../auth.form.scss"
 import { useAuth } from "../hooks/useAuth"
-import { useNavigate } from "react-router-dom"
 import { FaEye, FaEyeSlash } from "react-icons/fa"
 
 const Register = () => {
@@ -29,7 +28,7 @@ const Register = () => {
         try {
             await handleRegister({
                 email: email.trim(),
-                name: name,
+                name: name.trim(),
                 password: password.trim()
             })
             navigate("/home")
@@ -52,13 +51,13 @@ const Register = () => {
                         <label htmlFor="email">Email Address</label>
                         <input
                             onChange={(e) => { setEmail(e.target.value) }}
-                            type="email" id="email" name="email" placeholder="enter your email address" />
+                            type="email" id="email" name="email" value={email} placeholder="Enter your email address" />
                     </div>
                     <div className="input-group">
                         <label htmlFor="name">Name</label>
                         <input
                             onChange={(e) => { setName(e.target.value) }}
-                            type="name" id="name" name="name" placeholder="enter your name" />
+                            type="text" id="name" name="name" value={name} placeholder="Enter your name" />
                     </div>
                     <div className="input-group">
                         <label htmlFor="password">Password</label>
