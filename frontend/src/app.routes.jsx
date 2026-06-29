@@ -3,6 +3,8 @@ import Login from "./features/auth/pages/Login"
 import Register from "./features/auth/pages/Register"
 import Protected from "./features/auth/components/Protected"
 import Home from "./features/account/pages/Home"
+import Transfer from "./features/transfer/pages/Transfer"
+import AdminDashboard from "./features/admin/pages/AdminDashboard"
 
 export const router = createBrowserRouter([
     {
@@ -18,5 +20,17 @@ export const router = createBrowserRouter([
     {
         path: "/register",
         element: <Register />
+    },
+    {
+        path: "/transfer",
+        element: <Protected>
+            <Transfer />
+        </Protected>
+    },
+    {
+        path: "/admin",
+        element: <Protected>
+            <AdminDashboard />
+        </Protected>
     }
 ])

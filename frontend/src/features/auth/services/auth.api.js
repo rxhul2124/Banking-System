@@ -45,3 +45,14 @@ export async function logout() {
 
     return response.data
 }
+
+/**
+ * @name getCurrentUser
+ * @description get current logged in user
+ * @access private
+ */
+
+export async function getCurrentUser() {
+    const response = await api.get("/api/auth/me")
+    return response.data
+}

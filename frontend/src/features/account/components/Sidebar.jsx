@@ -35,7 +35,7 @@ function Sidebar() {
                         <i className="fa-solid fa-table-columns"></i>
                         <span>Dashboard</span>
                     </NavLink>
-                    <NavLink to="/transactions" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
+                    <NavLink to="/transfer" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
                         <i className="fa-solid fa-arrow-right-arrow-left"></i>
                         <span>Transfers</span>
                     </NavLink>

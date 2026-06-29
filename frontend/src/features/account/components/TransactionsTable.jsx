@@ -57,7 +57,7 @@ function TransactionTable() {
                                 })
                             }</td>
                             <td className={`tx-amount tx-amount--${tx.type.toLowerCase()}`}>
-                                {tx.type === "CREDIT" ? `+ ${'\u20B9'}${tx.transaction.amount}` : `- ${'\u20B9'}${tx.transaction.amount}`}
+                                {tx.type === "CREDIT" ? `+${'\u20B9'}${tx.transaction.amount}` : `-${'\u20B9'}${tx.transaction.amount}`}
                             </td>
                             <td>
                                 <span className={`tx-status tx-status--${tx.type.toLowerCase()}`}>

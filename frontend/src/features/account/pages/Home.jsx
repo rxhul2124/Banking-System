@@ -31,6 +31,14 @@ const Home = () => {
                         <TransactionTable />
                     </div>
                 </section>
+                <footer className="app-footer">
+                    <span className="footer-copy">© 2026 SkyBank Financial. All rights reserved.</span>
+                    <div className="footer-links">
+                        <a href="#security">Security</a>
+                        <a href="#privacy">Privacy Policy</a>
+                        <a href="#contact">Contact Us</a>
+                    </div>
+                </footer>
             </main>
         </div>
     )

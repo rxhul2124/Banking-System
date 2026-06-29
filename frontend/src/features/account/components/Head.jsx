@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import "./Head.scss"
 import { useAuth } from "../../auth/hooks/useAuth"
 
-function Head() {
+function Head({ title }) {
 
     const { user } = useAuth();
     const [isDark, setIsDark] = useState(() => {
@@ -19,7 +19,7 @@ function Head() {
 
     return (
         <div className="head">
-            <h1 className="head-greeting">Welcome back, {user.name}</h1>
+            <h1 className="head-greeting">{title || `Welcome back, ${user?.name}`}</h1>
             <div className="head-options">
                 <button className="head-icon-btn" title="Notifications">
                     <i className="fa-regular fa-bell"></i>

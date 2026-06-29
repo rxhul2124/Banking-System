@@ -100,13 +100,15 @@ async function createTransactionController(req, res) {
         const session = await mongoose.startSession()
         session.startTransaction()
 
-        const transaction = (await transactionModel.create({
+        const createdTransactions = await transactionModel.create([{
             fromAccount,
             toAccount,
             amount,
             idempotencyKey,
             status: "PENDING"
-        }))[0]
+        }], { session })
+        
+        transaction = createdTransactions[0]
 
 
         const debitLedgerEntry = await ledgerModel.create([{
@@ -133,8 +135,9 @@ async function createTransactionController(req, res) {
         await session.commitTransaction()
         session.endSession()
     } catch (err) {
+        console.error(err)
         return res.status(400).json({
-            message: "Transaction is pending due to some issue, please retry after sommetime",
+            message: "Transaction is pending due to some issue, please retry after sometime",
         })
     }
 
@@ -146,7 +149,7 @@ async function createTransactionController(req, res) {
 
 
 /**
- * @route POST /api/transactions/system/initial-funds
+ * @name createInitialFundsTransactionController
  * @description create initial funds transaction from system user
  * @access private
  */
