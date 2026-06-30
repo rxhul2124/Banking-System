@@ -1,25 +1,55 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Sidebar from '../../account/components/Sidebar';
 import Head from '../../account/components/Head';
 import './AdminDashboard.scss';
 
-function AdminDashboard() {
-    const mockUsers = [
-        { initials: 'AJ', name: 'Alice Johnson', email: 'alice.j@example.com', id: 'USR-9821', status: 'Active' },
-        { initials: 'MC', name: 'Michael Chen', email: 'm.chen@domain.co', id: 'USR-7432', status: 'Active' },
-        { initials: 'SW', name: 'Sarah Williams', email: 'sarah.w@example.org', id: 'USR-2105', status: 'Pending' },
-        { initials: 'DT', name: 'David Thompson', email: 'd.thompson@mail.com', id: 'USR-4490', status: 'Active' }
-    ];
+import { useAdmin } from '../hooks/useAdmin';
 
-    const [selectedUser, setSelectedUser] = useState(mockUsers[3]); // Default select David Thompson
+function AdminDashboard() {
+
+    const { adminLoading, handleCreateInitialTransaction, handleGetAllUserAccounts, allAccounts, depositData, setDepositData } = useAdmin()
+
+    const [selectedUser, setSelectedUser] = useState(null);
     const [searchQuery, setSearchQuery] = useState('');
     const [amount, setAmount] = useState('');
-    const [note, setNote] = useState('');
 
-    const filteredUsers = mockUsers.filter(user => 
-        user.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        user.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        user.id.toLowerCase().includes(searchQuery.toLowerCase())
+    useEffect(() => {
+        handleGetAllUserAccounts();
+    }, []);
+
+    useEffect(() => {
+        if (allAccounts.length > 0 && !selectedUser) {
+            setSelectedUser(allAccounts[0]);
+        }
+    }, [allAccounts, selectedUser]);
+
+    const getInitials = (name) => {
+        if (!name) return '';
+        return name.split(' ').map(n => n[0]).join('').toUpperCase();
+    };
+
+    const handleCloseReceipt = () => {
+        setDepositData(null);
+        handleGetAllUserAccounts();
+    };
+
+    const handleSubmitDeposit = async (e) => {
+        e.preventDefault();
+        if (!selectedUser || !amount) return;
+
+        try {
+            await handleCreateInitialTransaction(selectedUser._id, amount);
+            setAmount('');
+        } catch (err) {
+            console.error(err);
+            alert(err.response?.data?.message || 'Deposit failed');
+        }
+    };
+
+    const allAccountsFiltered = allAccounts.filter(acc =>
+        acc.user?.name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        acc.user?.email?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        acc._id?.toLowerCase().includes(searchQuery.toLowerCase())
     );
 
     return (
@@ -31,7 +61,7 @@ function AdminDashboard() {
                 <header className="head-container">
                     <Head title="Admin Console" />
                 </header>
-                
+
                 <section className="content-area">
                     <div className="admin-header">
                         <div className="admin-header__text">
@@ -41,9 +71,9 @@ function AdminDashboard() {
                         <div className="admin-header__search">
                             <div className="search-wrapper">
                                 <i className="fa-solid fa-magnifying-glass search-icon"></i>
-                                <input 
-                                    type="text" 
-                                    placeholder="Search by ID or Email..." 
+                                <input
+                                    type="text"
+                                    placeholder="Search by ID or Email..."
                                     value={searchQuery}
                                     onChange={(e) => setSearchQuery(e.target.value)}
                                     className="search-input"
@@ -58,9 +88,9 @@ function AdminDashboard() {
                             <div className="users-card">
                                 <div className="users-card__header">
                                     <h3 className="users-card__title">System Users</h3>
-                                    <span className="users-card__badge">Total: 1,204</span>
+                                    <span className="users-card__badge">Total: {allAccountsFiltered.length}</span>
                                 </div>
-                                
+
                                 <div className="table-responsive">
                                     <table className="users-table">
                                         <thead>
@@ -72,22 +102,22 @@ function AdminDashboard() {
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {filteredUsers.map((user) => (
-                                                <tr 
-                                                    key={user.id} 
-                                                    className={selectedUser?.id === user.id ? 'active-row' : ''}
+                                            {allAccountsFiltered.map((user) => (
+                                                <tr
+                                                    key={user._id}
+                                                    className={selectedUser?._id === user._id ? 'active-row' : ''}
                                                     onClick={() => setSelectedUser(user)}
                                                 >
                                                     <td>
                                                         <div className="user-info">
-                                                            <div className="user-avatar">{user.initials}</div>
+                                                            <div className="user-avatar">{getInitials(user.user?.name)}</div>
                                                             <div className="user-details">
-                                                                <span className="user-name">{user.name}</span>
-                                                                <span className="user-email">{user.email}</span>
+                                                                <span className="user-name">{user.user?.name}</span>
+                                                                <span className="user-email">{user.user?.email}</span>
                                                             </div>
                                                         </div>
                                                     </td>
-                                                    <td className="user-id">{user.id}</td>
+                                                    <td className="user-id">{user._id}</td>
                                                     <td>
                                                         <span className={`status-pill status-pill--${user.status.toLowerCase()}`}>
                                                             <span className="status-dot"></span>
@@ -95,7 +125,7 @@ function AdminDashboard() {
                                                         </span>
                                                     </td>
                                                     <td>
-                                                        {selectedUser?.id !== user.id && (
+                                                        {selectedUser?._id !== user._id && (
                                                             <button className="btn-manage" onClick={(e) => {
                                                                 e.stopPropagation();
                                                                 setSelectedUser(user);
@@ -124,38 +154,27 @@ function AdminDashboard() {
                                     <span className="selected-user-label">SELECTED USER</span>
                                     {selectedUser ? (
                                         <>
-                                            <h4 className="selected-user-name">{selectedUser.name}</h4>
-                                            <span className="selected-user-id">ID: {selectedUser.id}</span>
+                                            <h4 className="selected-user-name">{selectedUser.user?.name}</h4>
+                                            <span className="selected-user-id">ID: {selectedUser._id}</span>
                                         </>
                                     ) : (
                                         <span className="selected-user-placeholder">Select a user to allocate funds</span>
                                     )}
                                 </div>
 
-                                <form className="actions-form" onSubmit={(e) => e.preventDefault()}>
+                                <form className="actions-form" onSubmit={handleSubmitDeposit}>
                                     <div className="form-group">
                                         <label className="form-label">Amount (INR)</label>
                                         <div className="input-wrapper">
                                             <span className="input-prefix">INR</span>
-                                            <input 
-                                                type="number" 
-                                                placeholder="0.00" 
+                                            <input
+                                                type="number"
+                                                placeholder="0.00"
                                                 value={amount}
                                                 onChange={(e) => setAmount(e.target.value)}
                                                 className="form-input"
                                             />
                                         </div>
-                                    </div>
-
-                                    <div className="form-group">
-                                        <label className="form-label">Transaction Note (Optional)</label>
-                                        <textarea 
-                                            placeholder="e.g., Refund for order #1234, Bonus credit..." 
-                                            value={note}
-                                            onChange={(e) => setNote(e.target.value)}
-                                            className="form-textarea"
-                                            rows="3"
-                                        />
                                     </div>
 
                                     <div className="compliance-box">
@@ -165,20 +184,29 @@ function AdminDashboard() {
                                         </p>
                                     </div>
 
-                                    <button 
-                                        type="submit" 
+                                    <button
+                                        type="submit"
                                         className="button btn-confirm"
-                                        disabled={!selectedUser || !amount}
+                                        disabled={adminLoading || !selectedUser || !amount}
                                     >
-                                        <i className="fa-solid fa-money-bill-transfer"></i>
-                                        Confirm Deposit
+                                        {adminLoading ? (
+                                            <>
+                                                <i className="fa-solid fa-circle-notch fa-spin"></i>
+                                                <span>Processing Deposit...</span>
+                                            </>
+                                        ) : (
+                                            <>
+                                                <i className="fa-solid fa-money-bill-transfer"></i>
+                                                Confirm Deposit
+                                            </>
+                                        )}
                                     </button>
                                 </form>
                             </div>
                         </div>
                     </div>
                 </section>
-                
+
                 <footer className="app-footer">
                     <span className="footer-copy">© 2026 SkyBank Financial. All rights reserved.</span>
                     <div className="footer-links">
@@ -188,6 +216,68 @@ function AdminDashboard() {
                     </div>
                 </footer>
             </main>
+
+            {depositData && (
+                <div className="receipt-overlay">
+                    <div className="receipt-card">
+                        <div className="receipt-card__header">
+                            <div className="receipt-card__status-icon">
+                                <i className="fa-solid fa-circle-check"></i>
+                            </div>
+                            <h4 className="receipt-card__status-title">Deposit Successful</h4>
+                            <p className="receipt-card__status-subtitle">Funds have been allocated successfully</p>
+                        </div>
+                        
+                        <div className="receipt-card__amount">
+                            <span className="receipt-card__currency">INR</span>
+                            <span className="receipt-card__value">
+                                {depositData.transaction?.amount?.toLocaleString('en-IN', { minimumFractionDigits: 2 })}
+                            </span>
+                        </div>
+                        
+                        <div className="receipt-card__divider"></div>
+                        
+                        <div className="receipt-card__details">
+                            <div className="receipt-detail-row">
+                                <span className="receipt-detail-label">Transaction ID</span>
+                                <span className="receipt-detail-value code">{depositData.transaction?._id}</span>
+                            </div>
+                            <div className="receipt-detail-row">
+                                <span className="receipt-detail-label">Source Account</span>
+                                <span className="receipt-detail-value code">{depositData.transaction?.fromAccount}</span>
+                            </div>
+                            <div className="receipt-detail-row">
+                                <span className="receipt-detail-label">Recipient Account</span>
+                                <span className="receipt-detail-value code">{depositData.transaction?.toAccount}</span>
+                            </div>
+                            <div className="receipt-detail-row">
+                                <span className="receipt-detail-label">Date & Time</span>
+                                <span className="receipt-detail-value">
+                                    {new Date(depositData.transaction?.createdAt).toLocaleString('en-IN', {
+                                        day: 'numeric',
+                                        month: 'short',
+                                        year: 'numeric',
+                                        hour: '2-digit',
+                                        minute: '2-digit'
+                                    })}
+                                </span>
+                            </div>
+                            <div className="receipt-detail-row">
+                                <span className="receipt-detail-label">Status</span>
+                                <span className="receipt-detail-value badge success">
+                                    {depositData.transaction?.status}
+                                </span>
+                            </div>
+                        </div>
+                        
+                        <div className="receipt-card__footer">
+                            <button className="button btn-primary receipt-btn" onClick={handleCloseReceipt}>
+                                Done
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 }

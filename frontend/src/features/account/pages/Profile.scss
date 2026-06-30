@@ -1,0 +1,194 @@
+.profile-container {
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    min-height: 100vh;
+    width: 100%;
+    background-color: var(--bg-color);
+
+    @media (min-width: 769px) {
+        height: 100vh;
+        overflow: hidden;
+    }
+
+    .sidebar-wrapper {
+        position: relative;
+        z-index: 10;
+    }
+
+    .main-container {
+        display: flex;
+        flex-direction: column;
+        overflow-x: hidden;
+        background-color: var(--bg-color);
+        width: 100%;
+        min-width: 0;
+
+        @media (min-width: 769px) {
+            height: 100vh;
+            overflow-y: auto;
+        }
+    }
+
+    .head-container {
+        height: 80px;
+        padding: 1rem 0;
+        flex-shrink: 0;
+        width: 100%;
+    }
+
+    .content-area {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem;
+        flex: 1;
+        width: 100%;
+    }
+
+    .profile-card-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        animation: cardFadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    .profile-card {
+        background-color: var(--surface-color);
+        border: 1px solid var(--border-color);
+        border-radius: var(--card-radius);
+        box-shadow: var(--shadow-md);
+        padding: 3rem 2rem 2.5rem;
+        width: 100%;
+        max-width: 350px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        transition: transform var(--transition-normal);
+
+        &:hover {
+            transform: translateY(-2px);
+        }
+
+        .profile-card__avatar-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            border: 2px solid rgba(52, 211, 153, 0.3); // Mint green ring border
+            padding: 4px;
+            background-color: transparent;
+            margin-bottom: 1.5rem;
+        }
+
+        .profile-card__avatar {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: var(--primary-gradient);
+            color: var(--text-on-dark);
+            font-size: 2.25rem;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            letter-spacing: -0.02em;
+            box-shadow: 0 4px 12px rgba(10, 110, 122, 0.2);
+        }
+
+        .profile-card__info {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            width: 100%;
+
+            .profile-card__name {
+                font-size: 1.5rem;
+                font-weight: 700;
+                color: var(--text-primary);
+                letter-spacing: -0.015em;
+            }
+
+            .profile-card__email {
+                font-size: 0.9rem;
+                color: var(--text-secondary);
+                margin-top: 0.25rem;
+                word-break: break-all;
+            }
+        }
+
+        .profile-card__divider {
+            width: 100%;
+            height: 1px;
+            background-color: var(--border-light);
+            margin-bottom: 1.5rem;
+        }
+
+        .profile-card__details {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+
+            .profile-detail-row {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                font-size: 0.95rem;
+
+                .profile-detail-label {
+                    color: var(--text-secondary);
+                    font-weight: 500;
+                }
+
+                .profile-detail-value {
+                    color: var(--text-primary);
+                    font-weight: 700;
+
+                    &.code {
+                        font-family: 'Courier New', Courier, monospace;
+                        font-size: 0.85rem;
+                        background-color: var(--bg-color);
+                        padding: 0.15rem 0.4rem;
+                        border-radius: 0.25rem;
+                        font-weight: 600;
+                        border: 1px solid var(--border-color);
+                    }
+                }
+
+                .profile-detail-badge {
+                    background-color: var(--success-bg);
+                    color: var(--success-text);
+                    padding: 0.3rem 0.85rem;
+                    border-radius: 1rem;
+                    font-size: 0.775rem;
+                    font-weight: 700;
+                }
+            }
+        }
+    }
+}
+
+@keyframes cardFadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95) translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+@media (max-width: 768px) {
+    .profile-container {
+        grid-template-columns: 1fr;
+
+        .sidebar-wrapper {
+            display: none;
+        }
+    }
+}

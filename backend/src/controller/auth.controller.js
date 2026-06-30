@@ -133,7 +133,8 @@ async function getCurrentUserController(req, res) {
                 _id: user._id,
                 email: user.email,
                 name: user.name,
-                systemUser: user.systemUser
+                systemUser: user.systemUser,
+                createdAt: user.createdAt
             }
         })
 

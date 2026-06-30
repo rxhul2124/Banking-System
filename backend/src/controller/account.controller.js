@@ -70,8 +70,27 @@ async function getAccountBalanceController(req, res) {
 }
 
 
+/**
+ * @name getAllUsersAccount 
+ * @description controller to get all users account details
+ * @access private
+ */
+
+async function getAllUsersAccount(req, res) {
+    const accounts = await accountModel.find().populate({
+        path: 'user', select: 'name email'
+    })
+
+    res.status(200).json({
+        message: "Account fetched successfully",
+        accounts
+    })
+
+}
+
 module.exports = {
     createAccountController,
     getUserAccountController,
-    getAccountBalanceController
+    getAccountBalanceController,
+    getAllUsersAccount
 }

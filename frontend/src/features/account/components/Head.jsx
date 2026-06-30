@@ -6,11 +6,18 @@ function Head({ title }) {
 
     const { user } = useAuth();
     const [isDark, setIsDark] = useState(() => {
-        return document.documentElement.getAttribute('data-theme') === 'dark';
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            return savedTheme === 'dark';
+        }
+        // Fallback to system preference
+        return window.matchMedia('(prefers-color-scheme: dark)').matches;
     });
 
     useEffect(() => {
-        document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+        const theme = isDark ? 'dark' : 'light';
+        document.documentElement.setAttribute('data-theme', theme);
+        localStorage.setItem('theme', theme);
     }, [isDark]);
 
     const toggleTheme = () => {

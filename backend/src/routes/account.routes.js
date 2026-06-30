@@ -29,4 +29,12 @@ accountRouter.get("/", authMiddleware.authMiddleware, accountController.getUserA
 
 accountRouter.get("/balance/:accountId", authMiddleware.authMiddleware, accountController.getAccountBalanceController)
 
+/**
+ * @route GET /api/accounts/all
+ * @description get all users account details
+ * @access private
+ */
+
+accountRouter.get("/all", authMiddleware.authSystemUserMiddleware, accountController.getAllUsersAccount)
+
 module.exports = accountRouter

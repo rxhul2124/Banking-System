@@ -5,6 +5,7 @@ import Protected from "./features/auth/components/Protected"
 import Home from "./features/account/pages/Home"
 import Transfer from "./features/transfer/pages/Transfer"
 import AdminDashboard from "./features/admin/pages/AdminDashboard"
+import Profile from "./features/account/pages/Profile"
 
 export const router = createBrowserRouter([
     {
@@ -31,6 +32,12 @@ export const router = createBrowserRouter([
         path: "/admin",
         element: <Protected>
             <AdminDashboard />
+        </Protected>
+    },
+    {
+        path: "/profile",
+        element: <Protected>
+            <Profile />
         </Protected>
     }
 ])
