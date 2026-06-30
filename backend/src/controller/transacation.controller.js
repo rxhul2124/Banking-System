@@ -185,8 +185,6 @@ async function createInitialFundsTransactionController(req, res) {
         user: req.user._id
     })
 
-    console.log(fromUserAccount)
-
     if (!fromUserAccount) {
         return res.status(400).json({
             message: "system user account not found"
