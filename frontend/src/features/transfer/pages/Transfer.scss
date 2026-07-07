@@ -243,3 +243,43 @@
     }
 }
 
+@media (max-width: 768px) {
+    .transfer-container {
+        .content-area {
+            padding: 0.5rem 0.75rem 1.5rem;
+            gap: 1.25rem;
+        }
+
+        .transfer-grid {
+            margin-top: 1rem;
+            gap: 1.25rem;
+        }
+
+        .transfer-card {
+            padding: 1.25rem 1rem;
+
+            .transfer-card__header {
+                margin-bottom: 1.25rem;
+
+                .transfer-card__title {
+                    font-size: 1.3rem;
+                }
+
+                .transfer-card__subtitle {
+                    font-size: 0.85rem;
+                }
+            }
+
+            .transfer-form {
+                gap: 1rem;
+
+                .form-group {
+                    .form-label {
+                        font-size: 0.75rem;
+                    }
+                }
+            }
+        }
+    }
+}
+

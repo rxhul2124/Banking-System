@@ -40,3 +40,22 @@
         }
     }
 }
+
+@media (max-width: 768px) {
+    .head {
+        padding: 0 1rem;
+        padding-top: 1.5rem;
+
+        .head-greeting {
+            font-size: 1.25rem;
+        }
+
+        .head-options {
+            .head-icon-btn {
+                width: 2.25rem;
+                height: 2.25rem;
+                font-size: 0.95rem;
+            }
+        }
+    }
+}

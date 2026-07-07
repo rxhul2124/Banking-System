@@ -42,6 +42,11 @@
         padding: 0.5rem 1.5rem 2.5rem;
         flex: 1;
         width: 100%;
+
+        @media (max-width: 768px) {
+            padding: 0.5rem 0.75rem 1.5rem;
+            gap: 1.25rem;
+        }
     }
 
     .top-row {

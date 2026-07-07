@@ -180,3 +180,15 @@
     }
 }
 
+@media (max-width: 768px) {
+    .profile-container {
+        .content-area {
+            padding: 1rem 0.75rem;
+        }
+
+        .profile-card {
+            padding: 2rem 1.25rem 1.5rem;
+        }
+    }
+}
+
