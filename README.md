@@ -1,107 +1,101 @@
-# SkyBank - Full-Stack Modern Fintech Dashboard
+# 🏦 SkyBank - Full-Stack Modern Fintech Dashboard
 
-SkyBank is a secure, modern fintech web application that simulates bank ledger transactions. It features a high-fidelity glassmorphic dashboard, real-time balance updates, persistent dark/light themes, fund transfers with idempotency protection, and an administrative fund allocation console.
+[![React](https://img.shields.io/badge/React-19-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://react.dev/)
+[![Vite](https://img.shields.io/badge/Vite-8-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
+[![SCSS](https://img.shields.io/badge/Sass-SCSS-CC6699?style=for-the-badge&logo=sass&logoColor=white)](https://sass-lang.com/)
+[![Node.js](https://img.shields.io/badge/Node.js-20-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)](https://nodejs.org/)
+[![Express](https://img.shields.io/badge/Express-4.x-000000?style=for-the-badge&logo=express&logoColor=white)](https://expressjs.com/)
+[![MongoDB](https://img.shields.io/badge/MongoDB-Atlas-47A248?style=for-the-badge&logo=mongodb&logoColor=white)](https://www.mongodb.com/)
+[![JWT](https://img.shields.io/badge/JWT-Authentication-000000?style=for-the-badge&logo=jsonwebtokens&logoColor=white)](https://jwt.io/)
+
+SkyBank is a secure, premium full-stack fintech web application simulating bank ledger transactions. It features a high-fidelity dashboard, real-time balance checks, persistent dark/light themes, fund transfers with idempotency protection, and an administrative console.
+
+---
+
+## 🛠️ Key Learning Milestones
+
+Building this project was a huge step forward in my software development journey. Here are the core concepts I learned and implemented:
+
+*   **🔒 Secure Cross-Site JWT Authentication**: Developed a robust cookie-based JWT login system. To deploy on separate platforms (Vercel for frontend & Render for backend), I learned to configure secure cross-site cookies with `secure: true`, `httpOnly: true`, and `sameSite: "none"`.
+*   **💾 Relational MongoDB Queries using `.populate()`**: Implemented Mongoose `.populate()` chains to handle relational data (e.g. linking ledger records to sender/recipient account documents and user details) and return comprehensive transaction logs.
+*   **🎨 Advanced SCSS & Responsive Rail Navigation**: Structured modular stylesheets using nesting, variables, and mixins. Designed a responsive layout that dynamically collapses the full sidebar into a compact 60px icon rail with hover tooltips on mobile screens.
+*   **📂 Feature-Based Folder Architecture**: Shuffled from a standard MVC folder structure to a feature-based modular layout (grouping files by domains like `auth`, `account`, `transfer`, and `admin`). This keeps the codebase maintainable, readable, and ready to scale.
 
 ---
 
 ## 🚀 Key Features
 
-### 🔒 Secure Authentication
-- Cookie-based JSON Web Token (JWT) session security.
-- Token blacklisting on logout to prevent replay attacks.
-- Protected Route wrappers for dashboard safety.
-- Persistent session retention on page refresh.
-
-### 💼 Personal Banking
-- **Dashboard**: High-fidelity overview cards detailing primary balances, account information, and live transaction statements.
-- **Transfers**: Safe fund transfers to other accounts with built-in checks (insufficient balance, self-transfers, invalid account formats).
-- **Idempotency Protection**: Client-generated transaction tokens (UUIDv4) to guarantee zero double-charging on duplicate network calls.
-- **Invoice Receipts**: Sleek modal receipt popups showing complete metadata details on transaction completion.
-
-### 🛠️ Fund Management (Admin Panel)
-- **Interactive User list**: Table view of system users showing status, registration date, and individual account details.
-- **Search Filtering**: Filter accounts dynamically by Name, Email address, or Account ID.
-- **Fund Allocation**: Directly credit funds to any chosen user account (e.g. system deposits).
-- **Compliance Log**: Warning notices informing admins that all actions are archived for security compliance.
-
-### 🎨 Premium UI/UX Design
-- Glassmorphic card styling.
-- Responsive, fixed sidebar sidebar layout (desktop remains fixed while only content scrolls).
-- Persistent theme preferences (retains dark/light mode across page reloads using browser local storage).
+*   **Secure Authentication**: Fully protected client-side routes, JWT verification middleware on endpoints, and token blacklisting on logout.
+*   **Personal Dashboard**: Beautiful cards detailing primary balances (with eye-toggle visibility), account information, and live statements.
+*   **Safe Transfers**: Real-time transfers with validation checks (insufficient balance, self-transfers, format validations).
+*   **Double-Charge Protection**: Client-generated transaction tokens (UUIDv4) sent as idempotency keys to ensure duplicate network calls never double-debit an account.
+*   **Admin Console**: Interactive user directories, dynamically filterable accounts (by Name, Email, or Account ID), and direct fund allocations.
 
 ---
 
 ## 📁 Project Architecture
 
-```
+```text
 Banking-System/
 ├── backend/                  # Node.js + Express API server
 │   ├── src/
-│   │   ├── controller/      # API Request handlers
-│   │   ├── middleware/      # Auth validations & System user checks
-│   │   ├── models/          # Mongoose DB Schemas (User, Account, Transaction, Ledger)
-│   │   └── routes/          # Express route bindings
-│   └── server.js            # App entry point
+│   │   ├── controller/      # API handlers (auth, account, transaction)
+│   │   ├── middleware/      # Authentication & admin verification
+│   │   ├── models/          # Schemas (User, Account, Transaction, Ledger)
+│   │   └── routes/          # Express route declarations
+│   └── server.js            # Entry point
 │
-└── frontend/                 # React + Vite application
+└── frontend/                 # React + Vite client app
     ├── src/
     │   ├── features/
-    │   │   ├── auth/        # Auth Context, login/register pages
-    │   │   ├── account/     # Dashboard, profile pages, table components
-    │   │   ├── transfer/    # Transfer form page & hooks
-    │   │   └── admin/       # Admin console page, context, hooks
-    │   ├── style/           # SASS theme configs & global button modules
-    │   └── App.jsx          # Providers nesting & routes mounting
+    │   │   ├── auth/        # Context, login, and registration pages
+    │   │   ├── account/     # Dashboard, profile, and table components
+    │   │   ├── transfer/    # Transfer execution form & hooks
+    │   │   └── admin/       # Management console, context, and hooks
+    │   ├── style/           # SCSS styles, colors, and reusable button designs
+    │   └── App.jsx          # Providers & routes tree
 ```
 
 ---
 
-## 🛠️ Installation & Setup
+## ⚙️ Installation & Local Setup
 
-### Prerequisites
-- **Node.js** (v16.0 or higher)
-- **MongoDB** (Cloud Atlas URL or Local server instance)
-
----
-
-### Step 1: Backend Setup
+### Step 1: Backend Configuration
 1. Navigate into the backend folder:
    ```bash
    cd backend
    ```
-2. Install server dependencies:
+2. Install dependencies:
    ```bash
    npm install
    ```
-3. Create a `.env` file in the `backend/` directory:
+3. Create a `.env` file inside the `backend/` directory:
    ```env
    PORT=4000
-   MONGO_URI=your_mongodb_connection_string
-   JWT_SECRET=your_jwt_secret_key
+   MONGO_URI=your_mongodb_atlas_connection_string
+   JWT_SECRET=your_secret_jwt_sign_key
    ```
-4. Start the backend development server:
+4. Run the development server:
    ```bash
    npm run dev
    ```
 
----
-
-### Step 2: Frontend Setup
+### Step 2: Frontend Configuration
 1. Navigate into the frontend folder:
    ```bash
    cd ../frontend
    ```
-2. Install client dependencies:
+2. Install dependencies:
    ```bash
    npm install
    ```
-3. Start the frontend client (Vite server):
+3. Run the development server:
    ```bash
    npm run dev
    ```
-4. Access the web app at `http://localhost:5173`.
+4. Open [http://localhost:5173](http://localhost:5173) in your browser.
 
 ---
 
-## 🔒 Security & Database Compliance
-SkyBank uses a double-entry ledger database model. Credits and debits are treated as separate ledger documents tied to a master transaction ID. All updates are wrapped inside a **Mongoose Database Session Transaction** to ensure atomicity (if a debit fails, the credit is automatically rolled back, protecting against database corruption).
+## 🛡️ Database & Security Compliance
+SkyBank runs on a **double-entry ledger database model**. Credits and debits are stored as distinct ledger entries referencing a unique master transaction ID. To prevent data inconsistency, operations are executed inside a **Mongoose Database Session Transaction**—ensuring that if a credit fails, the debit is completely rolled back (Atomicity).
