@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import "./BalanceCard.scss"
 import { useAccount } from "../hooks/useAccount"
+import { useNavigate } from "react-router-dom"
 
 function BalanceCard() {
     const [showBalance, setShowBalance] = useState(false);
+    const navigate = useNavigate();
 
     const { account, handleGetUserBalance, accountBalance } = useAccount()
 
@@ -19,7 +21,7 @@ function BalanceCard() {
                 <p className="balance-card__label">TOTAL AVAILABLE BALANCE</p>
                 <div className="balance-card__amount-row">
                     <h2 className="balance-card__amount">
-                        {showBalance ? accountBalance : "••••••••"}
+                        ₹ {showBalance ? (accountBalance ?? 0).toLocaleString('en-IN', { minimumFractionDigits: 2 }) : "••••••••"}
                     </h2>
                     <button
                         className="balance-card__toggle"
@@ -30,8 +32,7 @@ function BalanceCard() {
                     </button>
                 </div>
                 <div className="balance-card__actions">
-                    <button className="button btn-outline">Add Funds</button>
-                    <button className="button btn-filled-dark">Transfer</button>
+                    <button className="button btn-filled-dark" onClick={() => navigate('/transfer')}>Transfer</button>
                 </div>
             </div>
         </div>

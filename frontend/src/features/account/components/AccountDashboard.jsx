@@ -19,9 +19,6 @@ function AccountDashboard() {
         <div className="account-container">
             <div className="account-head">
                 <h3>Account Details</h3>
-                <button className="account-menu" title="More options">
-                    <i className="fa-solid fa-ellipsis"></i>
-                </button>
             </div>
             <div className="account-detail">
                 <div className="detail-row">

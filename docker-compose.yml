@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "4000:4000"
+    environment:
+      - PORT=4000
+      - MONGO_URI=mongodb+srv://tanujk1768_db_user:VWtnRe1V834I9rN8@bankledger.sdoa7ah.mongodb.net/bankLedger
+      - JWT_SECRET=246ad99bd41f9fa7ac92a1e49833e348ac40a0865c3225da0b82b0899ffdc644172284234362001de75fb3f094518c7b49eb3101f0cffa8796f7e59b5afd7e02
+    restart: always
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "5173:80"  # Exposes the Nginx server on http://localhost:5173
+    depends_on:
+      - backend
+    restart: always

@@ -249,6 +249,7 @@ async function transactionHistoryController(req, res) {
                 { path: 'toAccount', populate: { path: 'user', select: 'name' } }
             ]
         })
+        .sort({ _id: -1 })
 
     if (!ledgers) {
         return res.status(404).json({

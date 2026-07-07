@@ -31,17 +31,18 @@ function Sidebar() {
                 </div>
 
                 <nav className="sidebar-nav">
-                    <NavLink to="/home" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
+                    <NavLink to="/home" title="Dashboard" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
                         <i className="fa-solid fa-table-columns"></i>
                         <span>Dashboard</span>
                     </NavLink>
-                    <NavLink to="/transfer" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
+                    <NavLink to="/transfer" title="Transfers" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
                         <i className="fa-solid fa-arrow-right-arrow-left"></i>
                         <span>Transfers</span>
                     </NavLink>
                     {user?.systemUser && (
                         <NavLink
                             to="/admin"
+                            title="Admin"
                             className={({ isActive }) =>
                                 `nav-link ${isActive ? "active" : ""}`
                             }
@@ -54,11 +55,11 @@ function Sidebar() {
             </div>
 
             <div className="sidebar-bottom">
-                <NavLink to="/profile" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
+                <NavLink to="/profile" title="Profile" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
                     <i className="fa-solid fa-user"></i>
                     <span>Profile</span>
                 </NavLink>
-                <button className="nav-link logout-link" onClick={onLogout}>
+                <button className="nav-link logout-link" title="Logout" onClick={onLogout}>
                     <i className="fa-solid fa-right-from-bracket"></i>
                     <span>Logout</span>
                 </button>

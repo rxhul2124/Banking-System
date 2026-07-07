@@ -13,7 +13,7 @@ const Protected = ({ children }) => {
                         <i className="fa-solid fa-building-columns"></i>
                     </div>
                     <div className="loading-screen__spinner"></div>
-                    <p className="loading-screen__text">Securing your session...</p>
+                    <p className="loading-screen__text">Loading your session...</p>
                 </div>
             </div>
         );

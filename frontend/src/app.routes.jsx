@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom"
+import { createBrowserRouter, Navigate } from "react-router-dom"
 import Login from "./features/auth/pages/Login"
 import Register from "./features/auth/pages/Register"
 import Protected from "./features/auth/components/Protected"
@@ -8,6 +8,10 @@ import AdminDashboard from "./features/admin/pages/AdminDashboard"
 import Profile from "./features/account/pages/Profile"
 
 export const router = createBrowserRouter([
+    {
+        path: "/",
+        element: <Navigate to="/home" replace />
+    },
     {
         path: "/home",
         element: <Protected>
